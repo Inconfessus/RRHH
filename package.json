@@ -1,0 +1,33 @@
+{
+    "name": "rrhh",
+    "version": "1.0.0",
+    "description": "Departamento de RRHH de Taller de Node.js S.A. de C.V.",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Inconfessus/RRHH"
+    },
+    "keywords": [
+        "RRHH",
+        "NodeJs",
+        "Express"
+    ],
+    "author": "E. Cortés, J. González",
+    "license": "ISC",
+    "bugs": {
+        "url": "git+https://github.com/Inconfessus/RRHH/issues"
+    },
+    "homepage": "git+https://github.com/Inconfessus/RRHH#readme",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "morgan": "^1.10.0",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.7"
+    }
+}
