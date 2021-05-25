@@ -21,7 +21,7 @@ app.use(cors);
 
 app.use("/user", user);
 
-
+app.use(auth);
 
 app.use("/empleados", empleados);
 

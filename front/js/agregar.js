@@ -1,10 +1,19 @@
 window.onload = init;
+var headers = {};
+var url = "http://localhost:3000"
 
 function init() {
-    if (!localStorage.getItem("token")) {
-        window.location.href = "login.html"
-    } else {
+
+    if (localStorage.getItem("token")) {
+        headers = {
+            headers: {
+                'Authorization': "bearer " + localStorage.getItem("token")
+            }
+        }
         document.querySelector('.btn-primary').addEventListener('click', agregar);
+
+    } else {
+        window.location.href = "login.html"
     }
 }
 
@@ -17,18 +26,13 @@ function agregar() {
     var email = document.getElementById('input-mail').value;
     var address = document.getElementById('input-address').value;
 
-
-    axios({
-        method: 'post',
-        url: "http://localhost:3000/empleados",
-        data: {
-            name: name,
-            last_name: last_name,
-            phone: phone,
-            email: email,
-            address: address
-        }
-    }).then(function(res) {
+    axios.post(url + "/empleados", {
+        name: name,
+        last_name: last_name,
+        phone: phone,
+        email: email,
+        address: address
+    }, headers).then(function(res) {
         console.log(res);
         alert("Registro exitoso")
         window.location.href = "agregar.html"

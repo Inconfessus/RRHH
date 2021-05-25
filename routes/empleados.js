@@ -56,10 +56,10 @@ empleados.put("/:id([0-9]{1,3})", async(req, res, next) => {
 });
 
 //Consultar datos de empleado por nombre
-empleados.get("/:name([A-Za-z '-]+)", async(req, res, next) => {
-    const name = req.params.name;
+empleados.post("/buscar", async(req, res, next) => {
+    const { name, last_name } = req.body;
 
-    let query = `SELECT * FROM empleados WHERE CONCAT(name,last_name)='` + name + `'`
+    let query = `SELECT * FROM empleados WHERE name = '${name}' AND last_name = '${last_name}';`
     const rows = await db.query(query);
 
     (rows.length) ?

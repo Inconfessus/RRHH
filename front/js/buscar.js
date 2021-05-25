@@ -1,10 +1,19 @@
 window.onload = init;
+var headers = {};
+var url = "http://localhost:3000"
 
 function init() {
-    if (!localStorage.getItem("token")) {
-        window.location.href = "login.html"
-    } else {
+
+    if (localStorage.getItem("token")) {
+        headers = {
+            headers: {
+                'Authorization': "bearer " + localStorage.getItem("token")
+            }
+        }
         document.querySelector('.btn-primary').addEventListener('click', buscar);
+
+    } else {
+        window.location.href = "login.html"
     }
 }
 
@@ -15,14 +24,8 @@ function buscar() {
     var last_name = document.getElementById('input-last_name').value;
     var full_name = name + last_name
 
-    axios({
-        method: 'get',
-        url: "http://localhost:3000/empleados/" + full_name,
-        data: {
-            name: name,
-            last_name: last_name
-        }
-    }).then(function(res) {
+    axios.post(url + "/empleados/buscar", { name: name, last_name: last_name },
+        headers).then(function(res) {
         console.log(res.data.message);
         displayEmpleados(res.data.message)
     }).catch(function(err) {

@@ -1,4 +1,5 @@
 window.onload = init;
+var url = "http://localhost:3000"
 
 function init() {
     if (!localStorage.getItem("token")) {
@@ -16,7 +17,7 @@ function login() {
 
     axios({
         method: 'post',
-        url: "http://localhost:3000/user/login",
+        url: url + "/user/login",
         data: {
             email: email,
             pass: pass

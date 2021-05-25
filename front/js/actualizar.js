@@ -1,10 +1,18 @@
 window.onload = init;
+var headers = {};
+var url = "http://localhost:3000"
 
 function init() {
-    if (!localStorage.getItem("token")) {
-        window.location.href = "login.html"
-    } else {
+    if (localStorage.getItem("token")) {
+        headers = {
+            headers: {
+                'Authorization': "bearer " + localStorage.getItem("token")
+            }
+        }
         document.querySelector('.btn-primary').addEventListener('click', actualizar);
+
+    } else {
+        window.location.href = "login.html"
     }
 }
 
@@ -18,18 +26,13 @@ function actualizar() {
     var email = document.getElementById('input-mail').value;
     var address = document.getElementById('input-address').value;
 
-
-    axios({
-        method: 'put',
-        url: "http://localhost:3000/empleados/" + user_id,
-        data: {
-            name: name,
-            last_name: last_name,
-            phone: phone,
-            email: email,
-            address: address
-        }
-    }).then(function(res) {
+    axios.put(url + "/empleados/" + user_id, {
+        name: name,
+        last_name: last_name,
+        phone: phone,
+        email: email,
+        address: address
+    }, headers).then(function(res) {
         console.log(res);
         alert("Se actualizaron los datos de forma exitosa")
         window.location.href = "actualizar.html"
